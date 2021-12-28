@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>长恨歌</title>
+	<style type="text/css">
+	html,body{
+		width:100%;
+		height:100%;
+		margin:0;
+		padding:0;
+	}
+	#main{
+		width:500px;
+		height:300px;
+		margin:0 auto;
+	}
+	.image1{
+		margin-top:-250px;
+		margin-left:550px;
+		cursor:pointer;
+	}
+	.image2{
+		margin-top:0px;
+		margin-left:700px;
+		cursor:pointer;
+		
+	}
+	.image3{
+		margin-top:10px;
+		margin-left:825px;
+		cursor:pointer;
+	}
+
+	.image4{
+		margin-top:10px;
+		margin-left:975px;
+		cursor:pointer;
+	}
+	#pad{
+		margin:0 auto;
+	}
+	@keyframes star{
+	  0%{opacity:0}
+		50%{opacity:1}
+		100%{opacity:0}
+	}
+	
+	</style>
+	<script src="js/jquery-1.11.3.min.js"></script>
+</head>
+<body>
+	<div id="music">
+	  <audio id="myAudio" autoplay="autoplay">
+	    <source src="music/yinyue.mp3" type="audio/mpeg">
+	    Your browser does not support the audio element.
+	  </audio>
+	  <audio src="res/hh.mp3" controls="controls" autoplay hidden="true" style="display:none;"/>
+	</div>
+	
+	<div id="main">
+		<img src="res/b.png">
+	</div>
+	<div class="image1">
+		<a href=" https://110qbeik.github.io/zuizhong1/">
+		<img src="res/d.png" width="150" height="75"></a></div>
+	<div class="image2">
+		<a href=" https://camellia1210.github.io/exe912/">
+		<img src="res/e.png" width="150" height="75"></a></div>
+	<div class="image3">
+		<a href=" https://110qbeik.github.io/ddd1/">
+		<img src="res/f.png" width="150" height="75"></a></div>
+	<div class="image4">
+		<a href="https://110qbeik.github.io/zzz1/">
+		<img src="res/h.png" width="150" height="75"></a></div>
+	<canvas id="pad" width='1000' height='500'><a href='http://www.cssass.com'>cssass.com</a></canvas>   
+</body>
+<script>
+  $(document).ready(function() {  
+    $(".xwcms").removeClass("animation");
+    $(".xwcms").on("click", function() {
+      $(".xwcms").addClass("animation");
+      $(this).toggleClass("pause");
+      var audio = $("#music audio")[0];
+      if (audio.paused) {
+        $(".xwcms").addClass("animation");
+        audio.play();
+      } else {
+        $(".xwcms").removeClass("animation");
+        audio.pause();
+      }
+      audio.addEventListener('ended', function () {  
+        $(".xwcms").removeClass("animation");
+      }, false);
+    });
+  });
+</script>
+
+<script type="text/javascript">
+var con=document.getElementById("pad").getContext('2d');   
+    con.strokeStyle = '#548C00';   
+    con.lineWidth=1.8;   
+var Tree=function(x, y, l, angle, n){ 
+    var a=[],rand=0,dir=1,val;
+    this.init=function(x, y, l, angle, n) {   
+        var that=this;   
+        if (n>0) {   
+            var a_l, a_r, x1, y1, x2, y2;   
+            x1 = x+0.5*l*Math.cos(angle*Math.PI/180);   
+            y1 = y-0.5*l*Math.sin(angle*Math.PI/180);   
+            x2 = x+l*Math.cos(angle*Math.PI/180);   
+            y2 = y-l*Math.sin(angle*Math.PI/180);   
+            a.push([x, y, x2, y2]);   
+            a_l = angle+30;   
+            a_r = angle-30;   
+            l=l*2/3;   
+            that.init(x2, y2, l, angle+rand, n-1);   
+            that.init(x1, y1, l*2/3, a_l+rand/2, n-1);   
+            that.init(x1, y1, l*2/3, a_r+rand/2, n-1);   
+            that.init(x2, y2, l*2/3, a_l+rand/2, n-1);   
+            that.init(x2, y2, l*2/3, a_r+rand/2, n-1);   
+         };   
+    }; 
+    this.run=function(){ 
+  con.clearRect(0,0,1000,500);
+        for(var i=0; i<a.length; i++){   
+            this.dw(a[i][0],a[i][1],a[i][2],a[i][3]);   
+        };  
+  a=[];
+    }; 
+ this.move=function(){
+  var that = this;
+  var _s=function(){
+   that.change();
+   that.init(x, y, l, angle, n);
+   that.run();
+   setTimeout(_s,100);
+  };
+  _s();
+ };
+ this.change=function(){
+  val=Math.random()*2;
+  rand+=dir*val;
+  if(rand>10 || rand<-2){dir=-dir;}  
+ };
+ this.init(x, y, l, angle, n);
+ this.run();
+};   
+Tree.prototype.dw=function(ax, ay, bx, by){   
+    con.beginPath()   
+    con.moveTo(ax, ay);   
+    con.lineTo(bx, by);   
+    con.stroke();   
+};   
+ 
+var ss=new Tree(300, 500, 200, 90, 6).move();
+
+ window.onload = function(){
+    	  createStar()
+      }
+      function createStar(){
+    	  var offsetWidth = document.body.offsetWidth;
+    	  var offsetHeight = document.body.offsetHeight;
+    	  
+    	  var star = document.createElement("img");
+    	  star.src = "res/i.png";
+    	  star.style.position = "absolute";
+		  star.style.width = "20";
+		  star.style.height = "30";
+    	  star.style.left = (Math.random()*offsetWidth)+"px";
+    	  star.style.top = (Math.random()*offsetHeight)+"px";
+    	  star.style.opacity = 0;
+    	  star.style.animation = "star 1s ease";
+    	  
+    	  star.addEventListener("animationend",function(){
+    		  document.body.removeChild(this);
+    	  });
+    	  
+    	  document.body.appendChild(star);
+    	  
+    	  window.setTimeout("createStar()",100);
+      }	  
+</script>
+
+</html>
+
+</html>
